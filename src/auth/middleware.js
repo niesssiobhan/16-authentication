@@ -11,16 +11,22 @@ module.exports = (req, res, next) => {
     // BASIC Auth  ... Authorization:Basic ZnJlZDpzYW1wbGU=
 
     switch(authType.toLowerCase()) {
-      case 'basic':
-        return _authBasic(encodedString);
-      default:
-        return _authError();
+    case 'basic':
+      return _authBasic(encodedString);
+    default:
+      return _authError();
     }
 
   } catch(e) {
     return _authError();
   }
 
+  /**
+   *
+   * Processes Base 64 authentication
+   * @param {str} authString
+   * @returns function evocation for generating and attaching a token
+   */
   function _authBasic(authString) {
     let base64Buffer = Buffer.from(authString,'base64'); // <Buffer 01 02...>
     let bufferString = base64Buffer.toString(); // john:mysecret
@@ -31,6 +37,11 @@ module.exports = (req, res, next) => {
       .then( user => _authenticate(user) );
   }
 
+  /**
+   *
+   * Middleware that attaches user and token to req.
+   * @param {obj} user
+   */
   function _authenticate(user) {
     if ( user ) {
       req.user = user;
@@ -42,6 +53,10 @@ module.exports = (req, res, next) => {
     }
   }
 
+  /**
+   *
+   *Status Code for Unauthorized user.
+   */
   function _authError() {
     next({status: 401, statusMessage: 'Unauthorized', message: 'Invalid User ID/Password'});
   }
