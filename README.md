@@ -8,11 +8,11 @@
 ### Links and Resources
 * [repo](https://github.com/niesssiobhan/16-authentication)
 * [travis](https://travis-ci.com/niesssiobhan/16-authentication)
-* [server](https://git.heroku.com/niess-woodward-16-lab.git)
+* [server](https://niess-woodward-16-lab.herokuapp.com/)
 
 #### Documentation
 * [swagger](http://xyz.com) (API assignments only)
-* [jsdoc](http://xyz.com) (All assignments)
+* [jsdoc](https://niess-woodward-16-lab.herokuapp.com/doc) (All assignments)
 
 ### Modules
 #### `middleware.js`
