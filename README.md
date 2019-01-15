@@ -23,7 +23,6 @@
 #### `index.js`
 
 ##### Exported Values and Methods
-
 ### Dependencies
 * Jest: `npm i jest` 
     * [docs](https://jestjs.io/docs/en/getting-started)
