@@ -21,6 +21,12 @@ users.pre('save', function(next) {
     .catch( error => {throw error;} );
 });
 
+/**
+ *
+ *
+ * @param {obj} auth
+ * @returns user information from db
+ */
 users.statics.authenticateBasic = function(auth) {
   let query = {username:auth.username};
   return this.findOne(query)
@@ -28,13 +34,22 @@ users.statics.authenticateBasic = function(auth) {
     .catch(console.error);
 };
 
-// Compare a plain text password against the hashed one we have saved
+/**
+ *
+ * Compare a plain text password against the hashed one we have saved
+ * @param {str} password
+ * @returns valid if passwords are identical.
+ */
 users.methods.comparePassword = function(password) {
   return bcrypt.compare(password, this.password)
-  .then( valid => valid ? this : null );
+    .then( valid => valid ? this : null );
 };
 
-// Generate a JWT from the user id and a secret
+/**
+ *
+ * Generate a JWT from the user id and a secret
+ * @returns formed JWT token signature
+ */
 users.methods.generateToken = function() {
   let tokenData = {
     id:this._id,
